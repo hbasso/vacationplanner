@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8000;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 app.get("/", (req, res) => {
-  res.json("Welcome to my vacation planner!");
+  res.json("Welcome to my vacation planner!", req);
 });
 
 app.get("/vacationplan", async (req, res) => {
