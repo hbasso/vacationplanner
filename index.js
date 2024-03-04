@@ -22,7 +22,7 @@ app.get("/test/:location", (req, res) => {
 });
 
 app.get("/testbody", (req, res) => {
-  res.json({ requestBody: req.body });
+  res.json({ requestBody: req.body.message });
 });
 
 app.get("/vacationplan", async (req, res) => {
