@@ -2,7 +2,7 @@ const express = require("express");
 const OpenAI = require("openai");
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // Make sure to replace 'your-api-key-here' with your actual OpenAI API key
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
