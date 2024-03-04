@@ -21,6 +21,10 @@ app.get("/test/:location", (req, res) => {
   res.json(location, body);
 });
 
+app.get("/testbody", (req, res) => {
+  res.json({ requestBody: req.body });
+});
+
 app.get("/vacationplan", async (req, res) => {
   try {
     // const userMessage = req?.body?.message;
