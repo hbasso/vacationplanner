@@ -48,8 +48,14 @@ app.post("/vacationplan", async (req, res) => {
       model: "gpt-3.5-turbo",
     });
 
+    const formattedResponse = JSON.stringify(
+      { response: completion.choices[0].message.content },
+      null,
+      2
+    );
+
     res.json({
-      response: completion.choices[0].message.content,
+      formattedResponse,
     });
   } catch (error) {
     console.error("Error from OpenAI:", error);
