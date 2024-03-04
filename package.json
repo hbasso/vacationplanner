@@ -1,0 +1,17 @@
+{
+  "name": "vacationplanner",
+  "version": "1.0.0",
+  "description": "leverages AI to help plan a vacation when given a location and personal interests",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Hudson Basso",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "express": "^4.18.3",
+    "nodemon": "^3.1.0",
+    "openai": "^4.28.4"
+  }
+}
