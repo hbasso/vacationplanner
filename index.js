@@ -37,6 +37,7 @@ app.post("/vacationplan", async (req, res) => {
     const userMessage = req.body.message;
 
     const completion = await openai.chat.completions.create({
+      response_format: { type: "json_object" },
       messages: [
         {
           role: "system",
@@ -49,6 +50,8 @@ app.post("/vacationplan", async (req, res) => {
     });
 
     const itineraryData = JSON.parse(completion.choices[0].message.content);
+
+    console.log(itineraryData);
 
     res.json({
       itineraryData,
