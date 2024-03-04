@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   res.json("Welcome to my Climate Change News API");
 });
 
-app.get("/vacationplan", (req, res) => {
+app.get("/vacationplan", async (req, res) => {
   try {
     const completion = await openai.chat.completions.create({
       messages: [{ role: "system", content: "You are a helpful assistant." }],
