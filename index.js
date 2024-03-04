@@ -21,11 +21,11 @@ app.get("/test/:location", (req, res) => {
 
 app.get("/vacationplan", async (req, res) => {
   try {
-    const userMessage = req.body.message;
+    // const userMessage = req?.body?.message;
     const completion = await openai.chat.completions.create({
       messages: [
-        { role: "system", content: "system test" },
-        { role: "user", content: userMessage },
+        { role: "system", content: "plan me a vacation to austin" },
+        // { role: "user", content: userMessage },
       ],
       model: "gpt-3.5-turbo",
     });
