@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 8000;
 // Make sure to replace 'your-api-key-here' with your actual OpenAI API key
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   const userMessage = req?.body?.message;
   if (userMessage) {
@@ -20,17 +22,28 @@ app.get("/test/:location", (req, res) => {
   res.json(location);
 });
 
-app.get("/testbody", (req, res) => {
-  res.json({ requestBody: req.body.message });
+app.post("/testbody", (req, res) => {
+  try {
+    const requestBody = req.body.message;
+    res.json({ requestBody });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-app.get("/vacationplan", async (req, res) => {
+app.post("/vacationplan", async (req, res) => {
   try {
-    // const userMessage = req?.body?.message;
+    const userMessage = req.body.message;
+
     const completion = await openai.chat.completions.create({
       messages: [
-        { role: "system", content: "plan me a vacation to austin" },
-        // { role: "user", content: userMessage },
+        {
+          role: "system",
+          content:
+            "You are a vacation planner, please use the following test to plan a vacation for the user.",
+        },
+        { role: "user", content: userMessage },
       ],
       model: "gpt-3.5-turbo",
     });
