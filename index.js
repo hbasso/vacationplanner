@@ -41,7 +41,7 @@ app.post("/vacationplan", async (req, res) => {
         {
           role: "system",
           content:
-            "You are a vacation planner, please use the following test to plan a vacation for the user.",
+            "You are a vacation planner, please use the following test to plan a vacation for the user. Format the response as a JSON object with the following data structure: { day1: 'Day 1 itinerary details', day2: 'Day 2 itinerary details', ...add more days as needed }.",
         },
         { role: "user", content: userMessage },
       ],
