@@ -8,14 +8,25 @@ const PORT = process.env.PORT || 8000;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 app.get("/", (req, res) => {
-  const body = req.body;
-  res.json("Welcome to my vacation planner", body);
+  const userMessage = req?.body?.message;
+  if (userMessage) {
+    res.json("Welcome to my vacation planner", userMessage);
+  }
+  res.json("Welcome to my vacation planner");
+});
+
+app.get("/test/:location", (req, res) => {
+  res.json("Welcome to my vacation planner");
 });
 
 app.get("/vacationplan", async (req, res) => {
   try {
+    const userMessage = req.body.message;
     const completion = await openai.chat.completions.create({
-      messages: [{ role: "system", content: "You are a helpful assistant." }],
+      messages: [
+        { role: "system", content: "system test" },
+        { role: "user", content: userMessage },
+      ],
       model: "gpt-3.5-turbo",
     });
 
