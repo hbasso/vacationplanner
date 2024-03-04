@@ -16,7 +16,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/test/:location", (req, res) => {
-  res.json("Welcome to my vacation planner");
+  const location = req.params.location;
+  const body = req.body;
+  res.json(location, body);
 });
 
 app.get("/vacationplan", async (req, res) => {
