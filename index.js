@@ -17,8 +17,7 @@ app.get("/", (req, res) => {
 
 app.get("/test/:location", (req, res) => {
   const location = req.params.location;
-  const body = req.body.message;
-  res.json(location, body);
+  res.json(location);
 });
 
 app.get("/testbody", (req, res) => {
