@@ -7,11 +7,11 @@ const PORT = process.env.PORT || 8000;
 // Make sure to replace 'your-api-key-here' with your actual OpenAI API key
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-app.get("/", async (req, res) => {
-  res.json("Welcome!");
+app.get("/", (req, res) => {
+  res.json("Welcome to my Climate Change News API");
 });
 
-app.get("/vacationplan", async (req, res) => {
+app.get("/vacationplan", (req, res) => {
   try {
     const completion = await openai.chat.completions.create({
       messages: [{ role: "system", content: "You are a helpful assistant." }],
