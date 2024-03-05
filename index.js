@@ -13,11 +13,11 @@ app.get("/", (req, res) => {
   res.json("Welcome to my vacation planner");
 });
 
-app.get("/vacationplan", async (req, res) => {
+app.get("/vacationplan/:location/:days/:interests", async (req, res) => {
   try {
-    const location = req.query.location;
-    const days = req.query.days;
-    const interests = req.query.interests;
+    const location = req.params.location;
+    const days = req.params.days;
+    const interests = req.params.interests;
 
     const userMessage = `I want to go on vacation to ${location}, my interests include ${interests}`;
 
@@ -26,7 +26,7 @@ app.get("/vacationplan", async (req, res) => {
       messages: [
         {
           role: "system",
-          content: `You are a vacation planner, please use the following test to plan a vacation for the user. Format the response as a JSON object with the following data structure: { day1: 'Day 1 itinerary details', day2: 'Day 2 itinerary details', ...you will return this for ${days} ammount of days }.`,
+          content: `You are a vacation planner, please use the following test to plan a vacation for the user. Format the response as a JSON object with the following data structure: { day1: 'Day 1 itinerary details', day2: 'Day 2 itinerary details', ...you will return this for ${days} amount of days }.`,
         },
         { role: "user", content: userMessage },
       ],
