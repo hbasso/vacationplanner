@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   res.json("Welcome to my vacation planner");
 });
 
-app.post("/vacationplan", async (req, res) => {
+app.get("/vacationplan", async (req, res) => {
   try {
     const location = req.query.location;
     const days = req.query.days;
