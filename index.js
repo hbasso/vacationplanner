@@ -10,31 +10,16 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  const userMessage = req?.body?.message;
-  if (userMessage) {
-    res.json("Welcome to my vacation planner", userMessage);
-  }
   res.json("Welcome to my vacation planner");
-});
-
-app.get("/test/:location", (req, res) => {
-  const location = req.params.location;
-  res.json(location);
-});
-
-app.post("/testbody", (req, res) => {
-  try {
-    const requestBody = req.body.message;
-    res.json({ requestBody });
-  } catch (error) {
-    console.error("Error:", error.message);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
 });
 
 app.post("/vacationplan", async (req, res) => {
   try {
-    const userMessage = req.body.message;
+    const location = req.query.location;
+    const days = req.query.days;
+    const interests = req.query.interests;
+
+    const userMessage = `I want to go on vacation to ${location}, my interests include ${interests}`;
 
     const completion = await openai.chat.completions.create({
       response_format: { type: "json_object" },
@@ -50,8 +35,6 @@ app.post("/vacationplan", async (req, res) => {
     });
 
     const itineraryData = JSON.parse(completion.choices[0].message.content);
-
-    console.log(itineraryData);
 
     res.json({
       itineraryData,
